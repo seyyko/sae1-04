@@ -7,6 +7,23 @@
 SELECT numero_client, num_tente, duree_reservation 
 FROM Reserve;
 ```
+### Résultat de la requête 1 : Trouver les clients ayant réservé une tente
+
+| numero_client | num_tente | duree_reservation |
+|---------------|-----------|-------------------|
+| 1             | 1         | 14                |
+| 2             | 2         | 7                 |
+| 3             | 3         | 10                |
+| 4             | 4         | 12                |
+| 5             | 5         | 15                |
+| 6             | 6         | 8                 |
+| 7             | 7         | 21                |
+| 8             | 8         | 25                |
+| 9             | 9         | 30                |
+| 10            | 10        | 9                 |
+
+
+
 
 ## 2. Trouver les clients ayant réservé une tente de plus de 7 personnes
 **Description** : Cette requête permet de retrouver les clients ayant réservé une tente avec plus de 7 personnes.
