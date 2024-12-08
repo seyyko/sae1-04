@@ -1,116 +1,175 @@
 
-# SQL Queries
-
-## 1. Trouver les clients ayant réservé une tente
-**Description** : Cette requête permet de retrouver les clients ayant réservé une tente, avec les informations de la tente et la durée de réservation.
-```sql
-SELECT numero_client, num_tente, duree_reservation 
-FROM Reserve;
-```
-### Résultat de la requête 1 : Trouver les clients ayant réservé une tente
-
-| numero_client | num_tente | duree_reservation |
-|---------------|-----------|-------------------|
-| 1             | 1         | 14                |
-| 2             | 2         | 7                 |
-| 3             | 3         | 10                |
-| 4             | 4         | 12                |
-| 5             | 5         | 15                |
-| 6             | 6         | 8                 |
-| 7             | 7         | 21                |
-| 8             | 8         | 25                |
-| 9             | 9         | 30                |
-| 10            | 10        | 9                 |
+## 1. Récupérer les clients qui participent aux activités "randonnée" ou "kayak".
+**Description** : Utiliser une jointure entre les tables des clients, des participations et des activités. Filtrer les résultats sur les types d'activités "randonnée" et "kayak".
+### Résultat de la requête 1 :
+| nom      | prenom  | type      |
+|----------|---------|-----------|
+| Dupont   | Jean    | randonnée |
+| Durand   | Paul    | kayak     |
+| Leclerc  | Isabelle| randonnée |
+| Simon    | Sophie  | kayak     |
 
 
+## 2. Obtenir les salaires moyens des salariés par ville.
+**Description** : Utiliser une jointure entre les salariés et les villes. Calculer la moyenne des salaires pour chaque ville en groupant par la colonne correspondant à la ville.
+### Résultat de la requête 2 :
+| departement  | salaire_moyen |
+|--------------|---------------|
+| Annecy       | 2400.0000     |
+| Bordeaux     | 2500.0000     |
+| Lille        | 2350.0000     |
+| Lyon         | 2250.0000     |
+| Marseille    | 2350.0000     |
+| Nantes       | 2700.0000     |
+| Paris        | 2650.0000     |
+| Quimper      | 2600.0000     |
+| Toulouse     | 2500.0000     |
+| Tours        | 2300.0000     |
 
 
-## 2. Trouver les clients ayant réservé une tente de plus de 7 personnes
-**Description** : Cette requête permet de retrouver les clients ayant réservé une tente avec plus de 7 personnes.
-```sql
-SELECT numero_client, num_tente, duree_reservation 
-FROM Reserve 
-JOIN Tente ON Reserve.num_tente = Tente.num_tente 
-WHERE Tente.nombre_pers > 7;
-```
+## 3. Lister les traiteurs qui fournissent des restaurants ou des fast-foods.
+**Description** : Faire une jointure entre les traiteurs, les services qu'ils fournissent et les types de restauration. Filtrer sur les types de nourriture spécifiques ("restaurant" ou "fast-food").
+### Résultat de la requête 3 :
+| nom               | type_nourriture |
+|-------------------|-----------------|
+| Traiteur Gourmet  | restaurant      |
+| Saveurs Exquises  | fast-food       |
+| Cuisine de Mamie  | restaurant      |
+| Resto Express     | fast-food       |
 
-## 3. Trouver les activités disponibles aujourd'hui
-**Description** : Cette requête permet de retrouver les activités dont la date est aujourd'hui.
-```sql
-SELECT numero_activite, type, horaire, prix, reste_place
-FROM Activite 
-WHERE DATE(horaire) = CURDATE();
-```
 
-## 4. Trouver les restaurants ouverts entre 8h et 20h
-**Description** : Cette requête permet de retrouver les restaurants qui sont ouverts entre 8h et 20h.
-```sql
-SELECT numero, type_nourriture, horaire_ouverture, horaire_fermeture, capacite, type_alimentaire
-FROM Restauration 
-WHERE horaire_ouverture <= '20:00:00' AND horaire_fermeture >= '08:00:00';
-```
+## 4. Obtenir les clients ayant réservé une tente pour plus de 20 jours.
+**Description** : Faire une jointure entre les clients et les réservations. Appliquer une condition pour récupérer les clients ayant réservé une tente pendant plus de 20 jours.
+### Résultat de la requête 4 :
+| nom     | prenom  | duree_reservation |
+|---------|---------|-------------------|
+| Fournier| Michel  | 21                |
+| Simon   | Sophie  | 25                |
+| Boucher | Lucie   | 30                |
 
-## 5. Trouver les traiteurs d'une gamme de prix 'moyen'
-**Description** : Cette requête permet de retrouver les traiteurs de gamme de prix 'moyen'.
-```sql
-SELECT id_traiteur, nom, specialites, gamme_de_prix 
-FROM Traiteur 
-WHERE gamme_de_prix = 'moyen';
-```
 
-## 6. Trouver les clients ayant participé à une activité avec un reste de place
-**Description** : Cette requête permet de retrouver les clients ayant participé à une activité où il reste encore des places.
-```sql
-SELECT numero_client, numero_activite 
-FROM Participe 
-JOIN Activite ON Participe.numero_activite = Activite.numero_activite 
-WHERE Activite.reste_place = TRUE;
-```
+## 5. Obtenir le salaire maximum des salariés dans chaque ville.
+**Description** : Utiliser une jointure entre les salariés et les villes. Utiliser la fonction MAX pour obtenir le salaire le plus élevé par ville et regrouper par ville.
+### Résultat de la requête 5 :
+| departement  | salaire_max |
+|--------------|-------------|
+| Annecy       | 2400        |
+| Bordeaux     | 2600        |
+| Lille        | 2500        |
+| Lyon         | 2300        |
+| Marseille    | 2400        |
+| Nantes       | 2700        |
+| Paris        | 2800        |
+| Quimper      | 2600        |
+| Toulouse     | 2500        |
+| Tours        | 2300        |
 
-## 7. Trouver les clients qui ont réservé une tente pendant plus de 14 jours
-**Description** : Cette requête permet de retrouver les clients ayant réservé une tente pour une durée supérieure à 14 jours.
-```sql
-SELECT numero_client, num_tente, duree_reservation 
-FROM Reserve 
-WHERE duree_reservation > 14;
-```
 
-## 8. Trouver les salariés d'une ville donnée
-**Description** : Cette requête permet de retrouver les salariés d'une ville spécifique.
-```sql
-SELECT numero_securite_sociale, nom, date_naissance, salaire
-FROM Salarie 
-WHERE INSEE = (SELECT INSEE FROM Ville WHERE code_postale = '75001');
-```
+## 6. Récupérer les clients qui n'ont pas réservé de tente.
+**Description** : Utiliser une jointure gauche (LEFT JOIN) entre les clients et les réservations pour identifier ceux qui n'ont pas de réservation de tente.
+### Résultat de la requête 6 :
+| nom       | prenom   |
+|-----------|----------|
+| Gomez     | Carlos   |
+| Bernier   | Alice    |
+| Robert    | Charlotte|
+| Joly      | Antoine  |
+| Chevalier | Hélène   |
 
-## 9. Trouver les clients ayant réservé une tente et participé à une activité
-**Description** : Cette requête permet de retrouver les clients ayant réservé une tente et participé à une activité.
-```sql
-SELECT Reserve.numero_client, Reserve.num_tente, Participe.numero_activite
-FROM Reserve 
-JOIN Participe ON Reserve.numero_client = Participe.numero_client;
-```
 
-## 10. Trouver les restaurants végétariens ouverts à partir de 8h
-**Description** : Cette requête permet de retrouver les restaurants végétariens ouverts à partir de 8h.
-```sql
-SELECT numero, type_nourriture, horaire_ouverture, horaire_fermeture
-FROM Restauration 
-WHERE type_alimentaire = 'végétarien' AND horaire_ouverture <= '08:00:00';
-```
+## 7. Trier les activités par prix en ordre décroissant.
+**Description** : Sélectionner les activités et leurs prix. Utiliser la clause ORDER BY pour trier les résultats par prix, du plus élevé au plus bas.
+### Résultat de la requête 7 :
+| type      | prix  |
+|-----------|-------|
+| escalade  | 50.00 |
+| escalade  | 50.00 |
+| kayak     | 30.00 |
+| kayak     | 30.00 |
+| vélo      | 25.00 |
+| vélo      | 25.00 |
+| randonnée | 20.00 |
+| randonnée | 20.00 |
+| yoga      | 15.00 |
+| yoga      | 15.00 |
 
-## 11. Trouver les activités dont le prix est inférieur à 30€
-**Description** : Cette requête permet de retrouver les activités dont le prix est inférieur à 30€.
-```sql
-SELECT numero_activite, type, prix 
-FROM Activite 
-WHERE prix < 30;
-```
 
-## 12. Trouver les clients ayant réservé une tente et dont la durée de réservation est supérieure à 7 jours
-**Description** : Cette requête permet de retrouver les clients ayant réservé une tente pour une durée supérieure à 7 jours.
-```sql
-SELECT numero_client, num_tente, duree_reservation 
-FROM Reserve 
-WHERE duree_reservation > 7;
-```
+## 8. Obtenir le nombre total de participants à chaque activité.
+**Description** : Utiliser une jointure entre les activités et les participations. Utiliser la fonction COUNT pour compter le nombre de participants à chaque activité, puis grouper par activité.
+### Résultat de la requête 8 :
+| type       | nombre_participants |
+|------------|---------------------|
+| escalade   | 2                   |
+| kayak      | 2                   |
+| randonnée  | 2                   |
+| vélo       | 2                   |
+| yoga       | 2                   |
+
+
+## 9. Récupérer les salariés avec un salaire supérieur à la moyenne des salaires de leur ville.
+**Description** : Utiliser une sous-requête pour calculer la moyenne des salaires par ville et la comparer au salaire de chaque salarié en effectuant une jointure avec la ville.
+### Résultat de la requête 9 :
+| nom      | salaire | departement |
+|----------|---------|-------------|
+| Morel    | 2300    | Lyon        |
+| Rousseau | 2400    | Marseille   |
+| Noir     | 2600    | Bordeaux    |
+| Benoit   | 2800    | Paris       |
+| Renaud   | 2500    | Lille       |
+
+
+## 10. Lister les villes ayant plus de 1 clients.
+**Description** : Utiliser une jointure entre les villes et les clients. Compter le nombre de clients par ville et filtrer celles ayant plus d'un client.
+### Résultat de la requête 10 :
+| departement | nombre_clients |
+|-------------|----------------|
+| Bordeaux    | 2              |
+| Lille       | 2              |
+| Lyon        | 2              |
+| Marseille   | 2              |
+| Paris       | 2              |
+
+
+## 11. Obtenir tous les types de nourriture, triés par ordre alphabétique.
+**Description** : Combiner les types de nourriture dans les tables "Restauration" et "Traiteur" en utilisant UNION pour obtenir une liste distincte. Trier les résultats par ordre alphabétique.
+### Résultat de la requête 11 :
+| type_nourriture           |
+|---------------------------|
+| bistrot                   |
+| burgers et frites         |
+| cantine                   |
+| cuisine du monde          |
+| cuisine française         |
+| cuisine japonaise         |
+| cuisine traditionnelle    |
+| fast-food                 |
+| fruits de mer             |
+| gastronomie italienne     |
+| haute cuisine française   |
+| restaurant                |
+| sandwichs                 |
+| snack                     |
+| snack rapide              |
+
+
+## 12. Obtenir les clients ayant réservé une tente ou participé à une activité.
+**Description** : Utiliser une jointure gauche (LEFT JOIN) pour lier les clients aux réservations de tentes et aux participations aux activités, sans exclusion.
+### Résultat de la requête 12 :
+| nom      | prenom   |
+|----------|----------|
+| Dupont   | Jean     |
+| Martin   | Marie    |
+| Durand   | Paul     |
+| Petit    | Julie    |
+| Lemoine  | Luc      |
+| Leclerc  | Isabelle |
+| Fournier | Michel   |
+| Simon    | Sophie   |
+| Boucher  | Lucie    |
+| Moreau   | François |
+| Gomez    | Carlos   |
+| Bernier  | Alice    |
+| Robert   | Charlotte|
+| Joly     | Antoine  |
+| Chevalier| Hélène   |
+

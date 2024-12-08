@@ -24,7 +24,12 @@ VALUES
 (7, 'Fournier', 'Michel', '1993-03-05', '2024-12-07', 107),
 (8, 'Simon', 'Sophie', '1987-07-18', '2024-12-08', 108),
 (9, 'Boucher', 'Lucie', '1984-10-22', '2024-12-09', 109),
-(10, 'Moreau', 'François', '1990-12-30', '2024-12-10', 110);
+(10, 'Moreau', 'François', '1990-12-30', '2024-12-10', 110),
+(11, 'Gomez', 'Carlos', '1983-04-12', '2024-12-11', 101),
+(12, 'Bernier', 'Alice', '1987-08-25', '2024-12-12', 102),
+(13, 'Robert', 'Charlotte', '1994-11-05', '2024-12-13', 103),
+(14, 'Joly', 'Antoine', '1989-03-15', '2024-12-14', 104),
+(15, 'Chevalier', 'Hélène', '1992-07-30', '2024-12-15', 105);
 
 -- Remplissage de la table Salarié
 INSERT INTO Salarie (numero_securite_sociale, nom, date_naissance, salaire, INSEE)
@@ -38,7 +43,12 @@ VALUES
 (1007, 'Thomas', '1977-12-19', 2700, 107),
 (1008, 'Dufresne', '1983-02-22', 2300, 108),
 (1009, 'Lucas', '1984-11-14', 2600, 109),
-(1010, 'Muller', '1988-06-04', 2400, 110);
+(1010, 'Muller', '1988-06-04', 2400, 110),
+(1011, 'Benoit', '1974-01-21', 2800, 101),
+(1012, 'Faure', '1990-03-12', 2200, 102),
+(1013, 'Pires', '1987-05-30', 2300, 103),
+(1014, 'Martins', '1993-07-10', 2400, 104),
+(1015, 'Renaud', '1985-09-17', 2500, 105);
 
 -- Remplissage de la table Traiteur
 INSERT INTO Traiteur (id_traiteur, gamme_de_prix, nom, specialites, INSEE)
